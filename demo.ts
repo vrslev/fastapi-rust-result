@@ -1,3 +1,4 @@
+import { Ok_User_ } from "./ts-client/models/Ok_User_";
 import { DefaultService } from "./ts-client/services/DefaultService";
 
 class AppError<T> extends Error {
@@ -23,4 +24,4 @@ async function handling_error<F extends () => Promise<T>, T>(
   throw new AppError(result);
 }
 
-const ok = await handling_error(() => DefaultService.meMeGet(true));
+const ok: Ok_User_ = await handling_error(() => DefaultService.meMeGet(true));
