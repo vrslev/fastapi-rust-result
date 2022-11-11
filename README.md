@@ -1,15 +1,19 @@
 # fastapi-rust-result
 
-**Table of Contents**
-
-- [Installation](#installation)
-- [License](#license)
+Proof of concept for implementation of Rust-like `Result` (`enum Result { Ok(data), Err(error) }`) in FastAPI. With OpenAPI support.
 
 ## Installation
 
 ```console
 pip install git+https://github.com/vrslev/fastapi-rust-result.git
 ```
+
+## Usage
+
+Install [hatch](https://hatch.pypa.io), and...
+
+- `hatch run app` to run the ASGI app,
+- `hatch run watch` to watch changed files and run tests.
 
 ## License
 
