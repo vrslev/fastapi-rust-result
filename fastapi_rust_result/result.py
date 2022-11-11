@@ -1,36 +1,32 @@
-from typing import Any, ClassVar, Generic, TypeAlias, TypeVar
+from typing import ClassVar, Generic, TypeAlias, TypeVar
 
 from pydantic import BaseConfig
 from pydantic.generics import GenericModel
 
-OkT = TypeVar("OkT")
-ErrT = TypeVar("ErrT")
+_OkT = TypeVar("_OkT")
 
 
-class Ok(GenericModel, Generic[OkT]):
-    data: OkT
+class Ok(GenericModel, Generic[_OkT]):
+    data: _OkT
     error: ClassVar[None] = None
 
     class Config(BaseConfig):
         @staticmethod
-        def schema_extra(
-            schema: Any, model: Any
-        ) -> None:  # pyright: ignore[reportIncompatibleVariableOverride]
+        def schema_extra(schema, model):  # pyright: ignore
             schema["properties"]["error"] = {"type": None}
 
 
-class Err(GenericModel, Generic[ErrT]):
+_ErrT = TypeVar("_ErrT")
+
+
+class Err(GenericModel, Generic[_ErrT]):
     data: ClassVar[None] = None
-    error: ErrT
+    error: _ErrT
 
     class Config(BaseConfig):
         @staticmethod
-        def schema_extra(
-            schema: Any, model: Any
-        ) -> None:  # pyright: ignore[reportIncompatibleVariableOverride]
+        def schema_extra(schema, model):  # pyright: ignore
             schema["properties"]["data"] = {"type": None}
 
 
-Result: TypeAlias = Ok[OkT] | Err[ErrT]
-
-__all__ = ["Result", "Ok", "Err"]
+Result: TypeAlias = Ok[_OkT] | Err[_ErrT]

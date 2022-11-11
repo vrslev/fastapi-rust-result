@@ -14,10 +14,6 @@ class InvalidCredentials(BaseModel):
     username: str
 
 
-class SomethingElse(BaseModel):
-    whaat: str
-
-
 GetCurrentUserResult = Result[User, InvalidCredentials]
 
 
@@ -31,7 +27,5 @@ def get_current_user(
 
 
 @app.get("/me", response_model=GetCurrentUserResult)
-async def me(
-    user: GetCurrentUserResult = Depends(get_current_user),
-) -> GetCurrentUserResult:
+async def me(user: GetCurrentUserResult = Depends(get_current_user)):
     return user
