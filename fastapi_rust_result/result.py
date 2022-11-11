@@ -10,6 +10,7 @@ class Ok(GenericModel, Generic[_OkT]):
     data: _OkT
     error: ClassVar[None] = None
 
+    # https://github.com/pydantic/pydantic/issues/1270
     class Config(BaseConfig):
         @staticmethod
         def schema_extra(schema, model):  # pyright: ignore
@@ -23,6 +24,7 @@ class Err(GenericModel, Generic[_ErrT]):
     data: ClassVar[None] = None
     error: _ErrT
 
+    # https://github.com/pydantic/pydantic/issues/1270
     class Config(BaseConfig):
         @staticmethod
         def schema_extra(schema, model):  # pyright: ignore
