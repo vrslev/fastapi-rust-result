@@ -12,10 +12,10 @@ def client():
 def test_me_ok(client: TestClient):
     r = client.get("/me", params={"return_ok": True})
     assert r.status_code == 200
-    assert r.json() == {"data": {"username": "lev"}}
+    assert r.json() == {"username": "lev"}
 
 
 def test_me_err(client: TestClient):
     r = client.get("/me", params={"return_ok": False})
-    assert r.status_code == 200
-    assert r.json() == {"error": {"username": "ivan"}}
+    assert r.status_code == 400
+    assert r.json() == {"code": "InvalidCredentials", "data": {"username": "ivan"}}

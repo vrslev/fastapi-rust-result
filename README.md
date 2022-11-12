@@ -1,6 +1,6 @@
 # fastapi-rust-result
 
-Proof of concept for implementation of Rust-like `Result` (`enum Result { Ok(data), Err(error) }`) in FastAPI. With OpenAPI support.
+Proof of concept for implementation of *better* exception handling in FastAPI. With OpenAPI support.
 
 ## Installation
 
