@@ -1,8 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Err_InvalidCredentials_ } from '../models/Err_InvalidCredentials_';
-import type { Ok_User_ } from '../models/Ok_User_';
+import type { User } from '../models/User';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -13,12 +12,12 @@ export class DefaultService {
     /**
      * Me
      * @param returnOk
-     * @returns any Successful Response
+     * @returns User Successful Response
      * @throws ApiError
      */
     public static meMeGet(
         returnOk: boolean,
-    ): CancelablePromise<(Ok_User_ | Err_InvalidCredentials_)> {
+    ): CancelablePromise<User> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/me',
@@ -26,6 +25,7 @@ export class DefaultService {
                 'return_ok': returnOk,
             },
             errors: {
+                400: `Bad Request`,
                 422: `Validation Error`,
             },
         });
